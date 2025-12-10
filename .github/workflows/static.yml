@@ -41,6 +41,15 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Reset notebook kernel to python3
+        run: |
+          pip install nbformat
+          python -c "
+          import nbformat
+          nb = nbformat.read(open('viking-pe.ipynb'), as_version=nbformat.NO_CONVERT)
+          nb['metadata']['kernelspec'] = {'name':'python3','display_name':'Python 3','language':'python'}
+          with open('viking-pe.ipynb', 'w') as f: nbformat.write(nb, f)
+          "
       - name: Run Jupyter notebook to generate index.html
         run: |
           pip install notebook nbclient nbconvert
