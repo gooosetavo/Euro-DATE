@@ -43,9 +43,8 @@ jobs:
 
       - name: Run Jupyter notebook to generate index.html
         run: |
-          pip install notebook nbclient
-          jupyter nbclient --execute --input viking-pe.ipynb
-        # The notebook is viking-pe.ipynb as found in the repo root.
+          pip install notebook nbclient nbconvert
+          jupyter nbconvert --execute viking-pe.ipynb
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
